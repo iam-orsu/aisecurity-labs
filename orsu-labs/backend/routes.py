@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from typing import List
 
-from models import LoginRequest, LoginResponse, UserProfile, LeaveRequest, ChatMessage, ChatResponse, GenericMessage
+from models import LoginRequest, LoginResponse, UserProfile, LeaveRequest, ChatMessage, ChatResponse, GenericMessage, UploadResponse
 from auth import verify_password, create_access_token, get_current_user
 from database import get_db_connection
 from lab1 import process_hr_chat
+from lab2 import extract_text_from_file, store_document, process_doc_chat
 
 router = APIRouter()
 
@@ -80,3 +81,33 @@ async def chat_with_hr(request: ChatMessage, current_user: dict = Depends(get_cu
 @router.post("/logout", response_model=GenericMessage)
 async def logout(current_user: dict = Depends(get_current_user)):
     return {"message": "Logged out successfully"}
+
+# ── Lab 2: Document Analyzer (RAG Exploitation) ──────────
+
+@router.post("/lab2/upload", response_model=UploadResponse)
+async def upload_document(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Upload a document for AI analysis. Accepts PDF and TXT files."""
+    allowed = {".pdf", ".txt"}
+    ext = "." + file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else ""
+    
+    if ext not in allowed:
+        raise HTTPException(status_code=400, detail="Only PDF and TXT files are supported.")
+    
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:  # 5 MB limit
+        raise HTTPException(status_code=400, detail="File too large. Max 5 MB.")
+    
+    text = extract_text_from_file(contents, file.filename)
+    stored_chars = store_document(current_user["id"], file.filename, text)
+    
+    return {
+        "message": f"Document '{file.filename}' analyzed successfully.",
+        "filename": file.filename,
+        "chars_extracted": stored_chars
+    }
+
+@router.post("/lab2/chat", response_model=ChatResponse)
+async def lab2_chat(request: ChatMessage, current_user: dict = Depends(get_current_user)):
+    """Chat with the Document Analyzer about uploaded documents."""
+    ai_response = process_doc_chat(current_user, request.message)
+    return {"response": ai_response}

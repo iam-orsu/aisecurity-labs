@@ -31,3 +31,8 @@ class ChatResponse(BaseModel):
 
 class GenericMessage(BaseModel):
     message: str
+
+class UploadResponse(BaseModel):
+    message: str
+    filename: str
+    chars_extracted: int

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Analyzer — Orsu Enterprises</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/lab2.css">
+</head>
+<body class="dashboard-page">
+    <div class="ambient"></div>
+
+    <header class="top-bar">
+        <div class="bar-inner">
+            <div class="bar-left">
+                <div class="mark">O</div>
+                <div class="greeting" id="greetingArea">
+                    <span>Document Analyzer</span>
+                </div>
+            </div>
+            <button id="logoutBtn" class="btn-danger">Logout</button>
+        </div>
+    </header>
+
+    <div class="dash-body">
+        <div class="chat-card">
+            <div class="chat-head">
+                <div class="chat-head-left">
+                    <div class="bot-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <div>
+                        <h3>Document Analyzer AI</h3>
+                        <div class="status">
+                            <span class="live-dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="tag">rag-powered</span>
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-label">📎 Upload Documents for Analysis</div>
+                <div class="drop-zone" id="dropZone">
+                    <span class="drop-icon">📄</span>
+                    <div class="drop-text"><strong>Click to upload</strong> or drag & drop</div>
+                    <div class="drop-hint">PDF or TXT • Max 5 MB</div>
+                    <input type="file" id="fileInput" accept=".pdf,.txt">
+                </div>
+                <div class="uploaded-files" id="uploadedFiles"></div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-body" id="chatMessages">
+                <div class="msg msg-ai">
+                    <p>Welcome to the Orsu Document Analyzer. Upload a document and I'll help you:</p>
+                    <ul>
+                        <li>Summarize key points</li>
+                        <li>Answer questions about the content</li>
+                        <li>Extract specific information</li>
+                    </ul>
+                    <p>Upload a file above to get started.</p>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <form id="chatForm" class="chat-foot">
+                <input type="text" id="chatInput" placeholder="Ask about your documents..." required autocomplete="off">
+                <button type="submit" class="send-btn" id="sendBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/lab2.js"></script>
+    <script>
+        if (!localStorage.getItem('token')) window.location.href = 'login.html';
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_name');
+            localStorage.removeItem('user_email');
+            window.location.href = 'login.html';
+        });
+
+        (function setGreeting() {
+            const name = localStorage.getItem('user_name') || 'Employee';
+            const hour = new Date().getHours();
+            let period = 'Good evening';
+            if (hour < 12) period = 'Good morning';
+            else if (hour < 17) period = 'Good afternoon';
+            document.getElementById('greetingArea').innerHTML =
+                '<span>' + period + ', <strong>' + name + '</strong></span>' +
+                '<span class="time-note">Document Analyzer • Lab 2.1</span>';
+        })();
+    </script>
+</body>
+</html>
