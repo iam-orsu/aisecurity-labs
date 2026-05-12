@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (email.toLowerCase() !== DEFAULT_EMAIL.toLowerCase()) {
                 showCelebration(res.user_name, email);
             } else {
-                window.location.href = 'dashboard.html';
+                const redirect = localStorage.getItem('redirect_after_login') || 'dashboard.html';
+                localStorage.removeItem('redirect_after_login');
+                window.location.href = redirect;
             }
         } catch (err) {
             errorText.textContent = err.message || 'Login failed.';

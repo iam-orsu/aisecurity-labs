@@ -1,0 +1,66 @@
+/* ── Lab 3: OrsuConnect ──────────────────────────────────── */
+
+/* Branded top strip */
+.orsuconnect-brand {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(90deg, rgba(139,92,246,0.08), transparent);
+    border-bottom: 1px solid rgba(139,92,246,0.12);
+}
+.orsuconnect-brand .brand-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple); box-shadow: 0 0 8px rgba(139,92,246,0.5);
+    animation: pulse 2.5s infinite;
+}
+.orsuconnect-brand .brand-text {
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--purple);
+    font-family: var(--mono);
+}
+.orsuconnect-brand .brand-sub {
+    font-size: 0.6rem; color: var(--text-600); margin-left: auto;
+    font-family: var(--mono);
+}
+
+/* Mood chips above input */
+.mood-bar {
+    padding: 0.5rem 1.25rem;
+    background: var(--bg-raised);
+    border-top: 1px solid var(--border);
+    display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center;
+}
+.mood-label { font-size: 0.65rem; color: var(--text-600); margin-right: 0.2rem; }
+.mood-chip {
+    padding: 0.2rem 0.65rem; border-radius: var(--r-full);
+    font-size: 0.68rem; cursor: pointer; border: 1px solid var(--border);
+    background: var(--bg-base); color: var(--text-400);
+    transition: all var(--speed) var(--ease);
+}
+.mood-chip:hover {
+    border-color: var(--purple); color: var(--purple);
+    background: rgba(139,92,246,0.05);
+}
+
+/* Override accent for Lab 3 — purple theme */
+.lab3 .msg-user { background: var(--purple) !important; }
+.lab3 .send-btn { background: var(--purple) !important; }
+.lab3 .send-btn:hover:not(:disabled) {
+    background: #7c3aed !important;
+    box-shadow: 0 0 12px rgba(139,92,246,0.3) !important;
+}
+.lab3 .live-dot { background: var(--purple) !important; box-shadow: 0 0 6px rgba(139,92,246,0.5) !important; }
+
+/* Encrypted badge */
+.encrypted-badge {
+    display: flex; align-items: center; gap: 0.35rem;
+    font-size: 0.6rem; color: var(--text-600); font-family: var(--mono);
+}
+.encrypted-badge svg { width: 10px; height: 10px; color: var(--green); }
+
+/* Disclaimer banner */
+.privacy-notice {
+    padding: 0.5rem 1.25rem;
+    background: rgba(139,92,246,0.04);
+    border-bottom: 1px solid rgba(139,92,246,0.08);
+    font-size: 0.65rem; color: var(--text-600); text-align: center;
+}

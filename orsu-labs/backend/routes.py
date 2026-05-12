@@ -6,6 +6,7 @@ from auth import verify_password, create_access_token, get_current_user
 from database import get_db_connection
 from lab1 import process_hr_chat
 from lab2 import extract_text_from_file, store_document, process_doc_chat
+from lab3 import process_personal_chat
 
 router = APIRouter()
 
@@ -110,4 +111,12 @@ async def upload_document(file: UploadFile = File(...), current_user: dict = Dep
 async def lab2_chat(request: ChatMessage, current_user: dict = Depends(get_current_user)):
     """Chat with the Document Analyzer about uploaded documents."""
     ai_response = process_doc_chat(current_user, request.message)
+    return {"response": ai_response}
+
+# ── Lab 3: OrsuConnect Personal AI (Chat History Leakage) ─
+
+@router.post("/lab3/chat", response_model=ChatResponse)
+async def lab3_chat(request: ChatMessage, current_user: dict = Depends(get_current_user)):
+    """OrsuConnect personal AI — vulnerable to compliance persona injection."""
+    ai_response = process_personal_chat(current_user, request.message)
     return {"response": ai_response}

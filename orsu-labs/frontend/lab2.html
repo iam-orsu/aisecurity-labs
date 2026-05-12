@@ -80,7 +80,10 @@
     <script src="js/app.js"></script>
     <script src="js/lab2.js"></script>
     <script>
-        if (!localStorage.getItem('token')) window.location.href = 'login.html';
+        if (!localStorage.getItem('token')) {
+            localStorage.setItem('redirect_after_login', 'lab2.html');
+            window.location.href = 'login.html';
+        }
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('token');
