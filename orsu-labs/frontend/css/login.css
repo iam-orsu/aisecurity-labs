@@ -1,0 +1,91 @@
+/* ── Login Page ─────────────────────────────────────────── */
+.login-page { justify-content: center; align-items: center; min-height: 100vh; padding: 2rem; }
+
+.login-card {
+    width: 100%; max-width: 380px;
+    background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--r-xl);
+    padding: 2.5rem 2rem; box-shadow: var(--shadow-xl);
+}
+
+/* Brand */
+.login-brand { text-align: center; margin-bottom: 2rem; }
+.login-brand .mark {
+    width: 48px; height: 48px; border-radius: var(--r-md);
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem; font-size: 1.2rem; font-weight: 900; color: white;
+    box-shadow: 0 6px 20px rgba(59,130,246,0.2);
+}
+.login-brand h2 { font-size: 1.35rem; margin-bottom: 0.3rem; }
+.login-brand .sub {
+    font-family: var(--mono); font-size: 0.65rem; color: var(--text-500);
+    text-transform: uppercase; letter-spacing: 2px;
+}
+
+/* Fields */
+.field { margin-bottom: 1.15rem; }
+.field label {
+    display: block; margin-bottom: 0.4rem; color: var(--text-400);
+    font-size: 0.75rem; font-weight: 500;
+}
+.field input {
+    width: 100%; padding: 0.7rem 0.85rem;
+    background: var(--bg-base); border: 1px solid var(--border);
+    border-radius: var(--r-sm); color: var(--text-100);
+    font-family: var(--font); font-size: 0.9rem;
+    transition: all var(--speed) var(--ease);
+}
+.field input:focus {
+    outline: none; border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.08);
+    background: var(--bg-deep);
+}
+.field input::placeholder { color: var(--text-600); }
+
+/* Error */
+.error-toast {
+    background: rgba(239, 68, 68, 0.05); color: var(--red);
+    padding: 0.65rem 0.85rem; border-radius: var(--r-sm); margin-bottom: 1rem;
+    font-size: 0.8rem; text-align: center;
+    border: 1px solid rgba(239, 68, 68, 0.12);
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+}
+
+.login-footer { text-align: center; margin-top: 1.5rem; }
+.login-footer a { font-size: 0.8rem; color: var(--text-500); }
+
+/* ── Celebration Overlay ───────────────────────────────── */
+.celebration-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(4, 7, 13, 0.94); backdrop-filter: blur(12px);
+    animation: overlayFade 0.4s var(--ease-out) forwards;
+}
+@keyframes overlayFade { from { opacity: 0; } to { opacity: 1; } }
+
+.celebration-card {
+    text-align: center; padding: 2.5rem 2rem;
+    border-radius: var(--r-xl); max-width: 420px; width: 92%;
+    background: var(--bg-surface); border: 1px solid rgba(16, 185, 129, 0.15);
+    box-shadow: var(--shadow-glow-green);
+    animation: cardBounce 0.5s var(--ease-spring) 0.25s forwards;
+    opacity: 0; transform: scale(0.9) translateY(10px);
+}
+@keyframes cardBounce { to { opacity: 1; transform: scale(1) translateY(0); } }
+
+.celebration-card .icon { font-size: 3.5rem; margin-bottom: 0.75rem; display: block; }
+.celebration-card h3 {
+    font-size: 1.3rem; color: var(--green); margin-bottom: 0.5rem;
+    font-weight: 700; letter-spacing: -0.01em;
+}
+.celebration-card .msg { color: var(--text-400); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.25rem; }
+.celebration-card .identity {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--blue-400);
+    margin: 1rem 0; padding: 0.65rem 0.85rem;
+    background: rgba(59,130,246,0.05); border-radius: var(--r-sm);
+    border: 1px solid rgba(59,130,246,0.1);
+}
+.celebration-card .footnote { font-size: 0.7rem; color: var(--text-600); }
+
+/* Confetti Canvas */
+#confettiCanvas { position: fixed; inset: 0; z-index: 10000; pointer-events: none; }
