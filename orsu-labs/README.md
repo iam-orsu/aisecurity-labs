@@ -1,4 +1,4 @@
-# Orsu AI Security Labs
+# CiotX AI Security Labs
 
 A Docker-based AI Pentesting Training Platform.
 

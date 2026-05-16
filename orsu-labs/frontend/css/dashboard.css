@@ -1,38 +1,79 @@
 /* ── Dashboard Layout ──────────────────────────────────── */
-.dashboard-page { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+.dashboard-page {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
 .top-bar {
-    padding: 0; flex-shrink: 0; z-index: 10;
-    background: var(--glass-heavy); backdrop-filter: blur(20px);
+    padding: 0;
+    flex-shrink: 0;
+    z-index: 10;
+    background: var(--glass-heavy);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
 }
+
 .bar-inner {
-    display: flex; justify-content: space-between; align-items: center;
-    max-width: 900px; margin: 0 auto; width: 100%; padding: 0.7rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0.7rem 1.5rem;
 }
-.bar-left { display: flex; align-items: center; gap: 0.75rem; }
-.bar-left .mark {
-    width: 28px; height: 28px; border-radius: var(--r-xs);
-    background: linear-gradient(135deg, var(--accent), var(--purple));
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 0.65rem; color: white;
+
+.bar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
-.greeting { font-size: 0.85rem; color: var(--text-400); font-weight: 400; }
-.greeting strong { color: var(--text-100); font-weight: 600; }
-.greeting .time-note { 
-    font-size: 0.7rem; color: var(--text-600); display: block; margin-top: 1px;
+
+.bar-left .mark-img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+.greeting {
+    font-size: 0.85rem;
+    color: var(--text-400);
+    font-weight: 400;
+}
+
+.greeting strong {
+    color: var(--text-100);
+    font-weight: 600;
+}
+
+.greeting .time-note {
+    font-size: 0.7rem;
+    color: var(--text-600);
+    display: block;
+    margin-top: 1px;
     font-family: var(--mono);
 }
 
 .dash-body {
-    flex: 1; display: flex; flex-direction: column;
-    padding: 1.25rem 1.5rem; overflow: hidden;
-    max-width: 900px; margin: 0 auto; width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.5rem;
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .chat-card {
-    flex: 1; display: flex; flex-direction: column;
-    background: var(--bg-surface); border: 1px solid var(--border);
-    border-radius: var(--r-lg); overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
     box-shadow: var(--shadow-lg);
 }
